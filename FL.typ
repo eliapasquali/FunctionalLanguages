@@ -1,4 +1,11 @@
-= Functional languages
+#align(center, 
+  [
+    #text(font: "Impact", weight: "bold", size: 18pt, [ = Functional languages ])
+    #image("magician.png")
+  ]
+)
+
+#pagebreak()
 
 #outline()
 
