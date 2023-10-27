@@ -1,23 +1,9 @@
-#set raw(syntaxes: "F#.sublime-syntax")
+#import "./config/notes.typ" : notes
 
-#align(center, 
-  [
-    #text(font: "Impact", weight: "bold", size: 24pt, [ Functional languages ])
-    #v(1fr)
-    #image("magician.png")
-    #v(1fr)
-    #line(length: 100%)
-    #smallcaps("2023-2024")
-  ]
+#show: notes.with(
+  author: "Elia Pasquali",
+  title: "Functional Languages"
 )
-
-#pagebreak()
-
-#outline(indent: auto, depth: 5)
-
-#pagebreak()
-
-// Title page
 
 = Intro
 What makes a language functional? The fact that "_functions are first class citizen of the language_". This means that functions can be passed as arguments to other functions, returned as values from other functions, and assigned to variables or data structures.
