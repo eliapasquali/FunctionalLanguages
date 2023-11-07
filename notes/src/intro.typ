@@ -6,7 +6,7 @@ What makes a language functional? The fact that "_functions are first class citi
 - *Statements* are single line of code of type `statement`
 - *Expressions* are entities that can be evaluated and have a type
 
-Let's describe (not completely) the `C` grammar in BNF notation:
+Let's describe (not completely) the C grammar in BNF notation:
 
 #grid(
   columns: (35%, 65%),
@@ -98,7 +98,7 @@ On the lower brackets we can see the result of the evaluation of the arithmetica
 
 == Declaration, assegnation, binding
 
-In imperative languages there are some core concepts like *declaration* and *assignment* or *initialiation*. So for example in `C`
+In imperative languages there are some core concepts like *declaration* and *assignment* or *initialiation*. So for example in C
 
 ```c
 int x;            // declaration
@@ -112,7 +112,7 @@ Binding answer to 42 in F\# will be ```Fsharp let answer = 42```
 
 == Syntax vs Semantics... and types
 
-Let's take for example this code ```C int x = &42```, a declaration with inizialitation in `C`.
+Let's take for example this code ```C int x = &42```, a declaration with inizialitation in C.
 
 This respects the grammar of the language because it is *syntactically correct*, in fact this can be described as `Type ID = expr`. We can also expand that expression in `expr = &expr`, which is the address extraction of a variable, where the internal `expr` is the constant expressions `42`. But speaking about *semantics* this is *wrong*!
 

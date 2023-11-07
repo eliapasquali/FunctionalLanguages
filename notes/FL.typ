@@ -10,3 +10,5 @@
 
 #include "src/functions.typ"
 // Functions, applications, currying, shadowing and overload
+
+#include "src/types.typ"
