@@ -211,36 +211,25 @@ If we look at the grammar for function application application (but not only in 
 
 = Currying
 
-Currying is the technique of translating the evaluation of a function that takes multiple arguments into evaluating a sequence of functions, each with a single argument.
+Currying is the technique of translating the evaluation of a function that takes multiple arguments 
+into evaluating a sequence of functions, each with a single argument.
 
-#align(center, 
-  [
-    ```Fsharp
-    // curry : ('a -> 'b -> 'c) -> 'a * 'b -> 'c
-    let curry f (x, y) = f x y
-
-    // uncurry : ('a * 'b -> 'c) -> 'a -> 'b -> 'c
-    let uncurry f x y = f (x, y)
-    ```
-  ]
-)
-
-Let's define the addition over integers in both forms:
-
-- Uncurried form:
-
+Let's see an example with integer addition. The uncurried form of this operation is
 ```Fsharp
 // uncurry_add : int * int -> int
-let uncurry_add = fun (x, y) -> x + y
+// Syntactic sugar for uncurry_add = fun (x, y) -> x + y
+let uncurry_add (x, y) = x + y
 
 let result = uncurry_add (7, 8)
 ```
 It accepts only pair of integers as arguments and after the application it returns the result.
 
-- Curried form:
+
+In its curried form instead we have
 ```Fsharp
 // curry_add : int -> (int -> int)
-let curry_add = fun x -> fun y -> x + y
+// Syntactic sugar for curry_add = fun (x, y) -> x + y
+let curry_add (x, y) = x + y
 
 // partial_application : int -> int
 let partial_application = curry_add 7
@@ -249,27 +238,28 @@ let partial_application = curry_add 7
 let final_application = z 1
 
 // total_application : int -> int -> int
-let total_application = addition 7 1
+let total_application = curry_add 7 1
 ```
+Currying is in fact using more arrows in a function definition. With this form we can pass single integers as arguments and make "partial" applications of the function. It is automatically applied associativity on the left.
 
-With this form we can pass single integers as arguments and make "partial" applications of the function. It is automatically applied associativity on the left.
+== Function transformer
 
-Currying is preferred in libraries. Instead pairs and more generally speaking tuples are used to express simple data types, such as point in space like `(x,y,z)`.
-
-Let's make another example of a curried function and analyze the types:
-```Fsharp
-let curried_f f (x, y) = f x y
-
-// Syntactic sugar for
-// let curried_f = fun f -> fun (x, y) -> f x y
-```
-The `curried_f` function uses `f` that is a _binary curried function_. So it applies `f` to `x` and then to `y`, decomposing the pair `(x, y)` that gets as input and returns the same type of `f`. Its type is ```Fsharp curried_f : (`a -> `b -> `c) -> (`a * `b) -> `c```, where the first two comes blocks comes from the type of the arguments `f` and `(x, y)` and the last is the return type of the applied function `f`.
-
-Instead the uncurried version uses a function `f` that is non curried because it takes as an input a pair and returns the same type as the input function, like before.
+We can define functions that transform from uncurried version to the curried one and viceversa.
 
 ```Fsharp
-let uncurried_f f x y = f (x, y)
-// We have 3 parameters, so there will be 3 arrows
-// uncurried_f : (`a * `b -> `c) -> `a -> `b -> `c
-//                    I : f         I:x   I:y    O 
+// curry : ('a * 'b -> 'c) -> 'a -> 'b -> 'c
+let curry f x y = f (x, y)
+
+// uncurry : ('a -> 'b -> 'c) -> 'a * 'b -> 'c
+let uncurry f (x, y) = f x y
+```
+
+`curry` converts an uncurried function to a curried function. `uncurry` converts a curried function to a function on pairs. Let's see an example with the addition:
+
+```Fsharp
+>>> curry uncurry_add 40 2
+>>> 42
+
+>>> uncurry curry_add (2, 40)
+>>> 42
 ```
