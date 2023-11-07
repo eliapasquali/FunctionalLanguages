@@ -9,7 +9,8 @@
   
   // Set F# syntax highlighting
   set raw(syntaxes: "F#.sublime-syntax")
-
+  set heading(numbering: "1.")
+  
   align(center, 
     [
       #text(font: "Impact", weight: "bold", size: 24pt, [ #title ])
