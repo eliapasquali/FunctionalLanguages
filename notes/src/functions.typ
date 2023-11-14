@@ -144,3 +144,40 @@ let rec fact n =
   | n     -> n * fact (n-1)
 ```
 
+We use the syntax
+
+```Fsharp
+match expr with
+| Pattern -> expr
+| Pattern -> expr
+| ...
+```
+
+Following the Chomksy hierarchy Patterns are at the level of regular expressions.
+
+All the branches must return the same type.
+
+== Higher order functions
+
+We call _higher order functions_ a function that takes functions as arguments.
+
+== Predicates
+
+We call _predicates_ a function where codomain is boolean, so something that returns only true or false.
+
+== #sym.eta conversion
+
+An _#sym.eta conversion_ is adding or dropping abstraction over a function.
+
+From the first to the second is an _#sym.eta reduction_, viceversa it is called _#sym.eta expansion_
+```Fsharp
+iter (fun x -> printf("%d") x) [1 .. 10]
+
+iter (printf("%d") x) [1 .. 10]
+```
+
+=== Folding
+
+In functional programming, *fold* (or _reduce_) is a family of higher order functions that process a data structure in some order and build a return value. For example summing all the elements of a list can be obtained from folding it.
+
+An opposed family of function is the _unfold_ family which create a data structure starting from a value and applying a function to it.

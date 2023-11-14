@@ -5,10 +5,22 @@
   title: "Functional Languages"
 )
 
-#include "src/intro.typ"
 // Various stuff from the first lessons
+#include "src/intro.typ"
+#pagebreak()
 
+// Functions, applications, currying, shadowing and overload, pattern matching
 #include "src/functions.typ"
-// Functions, applications, currying, shadowing and overload
+#pagebreak()
 
+// Types: records and union
 #include "src/types.typ"
+#pagebreak()
+
+// Lists
+#include "src/lists.typ"
+#pagebreak()
+
+// Trees
+#include "src/trees.typ"
+#pagebreak()

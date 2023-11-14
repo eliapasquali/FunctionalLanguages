@@ -43,19 +43,30 @@ In C we have `typedef` for creating an alias to an already existing type and `en
   ]
 )
 
-The same in F\# would be
+In F\# we have records and unions. Records are defined with the `type` keyword and unions with the `type` keyword and the `|` symbol.
 
-```Fsharp
-// Typedef
-type alias = int
+#grid(
+  columns: (1fr, 1fr),
+  column-gutter: 2em,
+  [
+    ```Fsharp
+    // Record type
+    type Person = {
+      name    : string
+      surname : string
+      age     : int
+    }
+    ```
+  ],
+  [
+    ```Fsharp
+    // Union type
+    type Color = Black | White | Yellow | Blue
+    ```
 
-// Record type
-type Person = {
-  name    : string
-  surname : string
-  age     : int
-}
-
-// Union type
-type Color = Black | White | Yellow | Blue
-```
+    ```Fsharp
+    // Typedef (an alias)
+    type alias = int
+    ```
+  ]
+)
